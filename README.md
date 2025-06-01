@@ -2,5 +2,6 @@
 This is where all work for CSD340 would be held.
 ## Contributors
 •	Joseph Issa
+
 •	Brijette Baboolal
 
