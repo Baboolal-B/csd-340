@@ -1,2 +1,7 @@
-# csd-340
-This is were all work for CSD340 would be held
+# CSD 340 Web Development with HTML and CSS
+This is where all work for CSD340 would be held.
+## Contributors
+•	Joseph Issa
+
+•	Brijette Baboolal
+
