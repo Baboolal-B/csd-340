@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSD 340 Web Development with HTML and CSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      color: #333;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #4a2c2a;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease, box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .clicked {
+      transform: scale(1.2) rotate(5deg);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+  <script>
+    function changeImageStyle(img) {
+      img.classList.toggle('clicked');
+    }
+  </script>
+</head>
+<body>
+  <h1>Assignment 10.3: JavaScript - Part 2</h1>
+  <p>Click the images below to apply a stylish animation!</p>
+
+  <div class="image-container">
+    <img src="leftside.jpg" alt="Left Side" onclick="changeImageStyle(this)">
+    <img src="rightside.jpg" alt="Right Side" onclick="changeImageStyle(this)">
+  </div>
+
+  <p>Click again to toggle the effect.</p>
+
+  <footer>&copy; 2025 Brijette Baboolal - CSD 340 Web Development</footer>
+</body>
+</html>
