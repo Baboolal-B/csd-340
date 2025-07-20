@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSD 340 Web Development with HTML and CSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #f3f4f6;
+      --text-color: #111827;
+      --light-border: #e5e7eb;
+      --danger-color: #dc2626;
+      --highlight-bg: #fee2e2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      padding: 10px 12px;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--light-border);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      outline-color: var(--primary-color);
+    }
+
+    .button-group {
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin-right: 0.5rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+
+    #itemList {
+      list-style: none;
+      padding-left: 0;
+      counter-reset: item;
+      display: none;
+      margin-top: 1rem;
+    }
+
+    #itemList li {
+      background-color: white;
+      margin-bottom: 8px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--light-border);
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+
+    #itemList li::before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    #itemList li:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    #itemList li.selected {
+      background-color: var(--highlight-bg);
+      border: 1px solid var(--danger-color);
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      color: #6b7280;
+    }
+
+    @media (max-width: 600px) {
+      input[type="text"] {
+        width: 100%;
+      }
+      .button-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .button-group button {
+        margin-bottom: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Assignment 11.2: JavaScript - Part 3</h1>
+
+  <input type="text" id="itemInput" placeholder="Enter an item" />
+  <div class="button-group">
+    <button onclick="addItem()">Add</button>
+    <button onclick="deleteSelectedItems()">Delete Selected</button>
+    <button onclick="toggleList()" id="toggleBtn">Show Items</button>
+  </div>
+
+  <ul id="itemList"></ul>
+
+  <footer>&copy; 2025 Brijette Baboolal - CSD 340 Web Development</footer>
+
+  <script>
+    let items = [];
+    let listVisible = false;
+
+    function addItem() {
+      const input = document.getElementById("itemInput");
+      const value = input.value.trim();
+      if (value !== "") {
+        items.push(value);
+        alert(`Item: "${value}" added as Item ${items.length}`);
+        input.value = "";
+        if (listVisible) {
+          displayItems();
+        }
+      } else {
+        alert("Please enter a value.");
+      }
+    }
+
+    function deleteSelectedItems() {
+      const listItems = document.querySelectorAll("#itemList li.selected");
+      if (listItems.length === 0) {
+        alert("No items selected for deletion.");
+        return;
+      }
+
+      listItems.forEach((li) => {
+        const text = li.textContent.trim().replace(/^\d+\.\s*/, "");
+        const index = items.indexOf(text);
+        if (index > -1) {
+          items.splice(index, 1);
+        }
+      });
+
+      alert(`${listItems.length} item(s) deleted.`);
+      displayItems();
+    }
+
+    function displayItems() {
+      const list = document.getElementById("itemList");
+      list.innerHTML = "";
+
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        li.addEventListener("click", function () {
+          li.classList.toggle("selected");
+        });
+        list.appendChild(li);
+      });
+    }
+
+    function toggleList() {
+      const list = document.getElementById("itemList");
+      const toggleBtn = document.getElementById("toggleBtn");
+
+      if (listVisible) {
+        list.style.display = "none";
+        toggleBtn.textContent = "Show Items";
+      } else {
+        displayItems();
+        list.style.display = "block";
+        toggleBtn.textContent = "Hide Items";
+      }
+
+      listVisible = !listVisible;
+    }
+
+    document.getElementById("itemInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        addItem();
+      }
+    });
+  </script>
+</body>
+</html>
