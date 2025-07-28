@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSD 340 Web Development with HTML and CSS</title>
+  <link rel="stylesheet" href="Baboolal_Mod12_2.css">
+</head>
+<body>
+  <div id="container">
+    <h1>Assignment 12.2: JavaScript - Part 4</h1>
+    
+    <div style="display: flex; justify-content: space-between;">
+      <div id="left-div">
+        <h3>Top 10 Favorite Books</h3>
+
+        <div style="margin-bottom: 10px;">
+          <button onclick="displayTopToBottom()">Top to Bottom</button>
+          <button onclick="displayBottomToTop()">Bottom to Top</button>
+        </div>
+
+        <!-- This ol will preserve the styling (solid border, red, rounded) -->
+        <ol id="bookList">
+          <li>The Great Gatsby</li>
+          <li>To Kill a Mockingbird</li>
+          <li>1984</li>
+          <li>If You Could See The Sun</li>
+          <li>The 7 1/2 Deaths Of Evelyn Hardcastle</li>
+          <li>The Beautiful Maddening</li>
+          <li>The Catcher in the Rye</li>
+          <li>Twisted Love</li>
+          <li>Yours Truly</li>
+          <li>Twisted Games</li>
+        </ol>
+      </div>
+
+      <div id="right-div">
+        <h3>5 Things I’ve Learned Since the Course Started</h3>
+        <ul>
+          <li>How to structure HTML documents</li>
+          <li>How to use CSS selectors</li>
+          <li>How to style elements with padding, borders, and colors</li>
+          <li>How to create a landing page for GitHub</li>
+          <li>How to create and publish a website</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="bottom-div">
+      <a href="../index.html">Back to Landing Page</a>
+    </div>
+  </div>
+
+  <script>
+    const books = [
+      "The Great Gatsby",
+      "To Kill a Mockingbird",
+      "1984",
+      "If You Could See The Sun",
+      "The 7 1/2 Deaths Of Evelyn Hardcastle",
+      "The Beautiful Maddening",
+      "The Catcher in the Rye",
+      "Twisted Love",
+      "Yours Truly",
+      "Twisted Games"
+    ];
+
+    function displayTopToBottom() {
+      const sortedBooks = [...books].sort();
+      updateList(sortedBooks);
+    }
+
+    function displayBottomToTop() {
+      const sortedBooks = [...books].sort().reverse();
+      updateList(sortedBooks);
+    }
+
+    function updateList(bookArray) {
+      const bookList = document.getElementById("bookList");
+      bookList.innerHTML = "";
+      bookArray.forEach(book => {
+        const li = document.createElement("li");
+        li.textContent = book;
+        bookList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
